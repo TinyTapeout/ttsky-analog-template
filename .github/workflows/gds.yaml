@@ -14,10 +14,9 @@ jobs:
           submodules: recursive
 
       - name: Read top module name
-        uses: mikefarah/yq@v4
         id: top_module
-        with:
-          cmd: echo TOP_MODULE=`yq '.project.top_module' info.yaml` > $GITHUB_OUTPUT
+        run: |
+          echo TOP_MODULE=`yq '.project.top_module' info.yaml` | tee $GITHUB_OUTPUT
 
       - name: Create and publish the GDS artifact
         uses: TinyTapeout/tt-gds-action/custom_gds@ttsky25b
